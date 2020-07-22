@@ -55,24 +55,26 @@ public class StaffController {
 
     @FXML
     public void view() {
-        try {
-            view.setString(1, id.getText());
-            ResultSet resultSet = view.executeQuery();
-            if (resultSet.next()) {
-                last.setText(resultSet.getString(2));
-                first.setText(resultSet.getString(3));
-                mi.setText(resultSet.getString(4));
-                address.setText(resultSet.getString(5));
-                city.setText(resultSet.getString(6));
-                state.setText(resultSet.getString(7));
-                telephone.setText(resultSet.getString(8));
-                message.setText("ID found");
-            } else {
-                message.setText("ID not found.");
+        new Thread(() -> {
+            try {
+                view.setString(1, id.getText());
+                ResultSet resultSet = view.executeQuery();
+                if (resultSet.next()) {
+                    last.setText(resultSet.getString(2));
+                    first.setText(resultSet.getString(3));
+                    mi.setText(resultSet.getString(4));
+                    address.setText(resultSet.getString(5));
+                    city.setText(resultSet.getString(6));
+                    state.setText(resultSet.getString(7));
+                    telephone.setText(resultSet.getString(8));
+                    message.setText("ID found");
+                } else {
+                    message.setText("ID not found.");
+                }
+            } catch (SQLException throwables) {
+                message.setText(throwables.getMessage());
             }
-        } catch (SQLException throwables) {
-            message.setText(throwables.getMessage());
-        }
+        }).start();
     }
 
     @FXML
