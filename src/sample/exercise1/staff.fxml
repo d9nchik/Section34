@@ -5,43 +5,41 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0"
-      prefWidth="550.0" scaleShape="false" xmlns="http://javafx.com/javafx/10.0.2-internal"
-      xmlns:fx="http://javafx.com/fxml/1">
-    <Text fx:id="message" strokeType="OUTSIDE" strokeWidth="0.0"/>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="550.0" scaleShape="false" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.exercise1.StaffController">
+    <Text fx:id="message" strokeType="OUTSIDE" strokeWidth="0.0" />
     <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
         <opaqueInsets>
-            <Insets/>
+            <Insets />
         </opaqueInsets>
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID"/>
-        <TextField fx:id="id"/>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
+        <TextField fx:id="id" />
     </HBox>
     <HBox prefHeight="100.0" prefWidth="200.0" spacing="4.0">
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name"/>
-        <TextField fx:id="last"/>
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First Name"/>
-        <TextField fx:id="first"/>
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="MI"/>
-        <TextField fx:id="mi" prefColumnCount="1"/>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" />
+        <TextField fx:id="last" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
+        <TextField fx:id="first" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="MI" />
+        <TextField fx:id="mi" prefColumnCount="1" />
     </HBox>
     <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address"/>
-        <TextField fx:id="address"/>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address" />
+        <TextField fx:id="address" />
     </HBox>
     <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="City"/>
-        <TextField fx:id="city"/>
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="State"/>
-        <TextField fx:id="state"/>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="City" />
+        <TextField fx:id="city" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="State" />
+        <TextField fx:id="state" />
     </HBox>
     <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Telephone"/>
-        <TextField fx:id="telephone"/>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Telephone" />
+        <TextField fx:id="telephone" />
     </HBox>
     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-        <Button mnemonicParsing="false" text="View"/>
-        <Button mnemonicParsing="false" text="Insert"/>
-        <Button mnemonicParsing="false" text="Update"/>
-        <Button mnemonicParsing="false" text="Clear"/>
+        <Button mnemonicParsing="false" onAction="#view" text="View" />
+        <Button mnemonicParsing="false" onAction="#insert" text="Insert" />
+        <Button mnemonicParsing="false" text="Update" />
+        <Button mnemonicParsing="false" text="Clear" />
     </HBox>
 </VBox>
