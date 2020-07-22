@@ -14,13 +14,14 @@ public class StaffController {
     private Text message;
 
     private PreparedStatement view, insert, update, clear;
+    private Connection connection;
 
     @FXML
     public void initialize() {
         new Thread(() -> {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/javaBook" +
+                connection = DriverManager.getConnection("jdbc:mysql://localhost/javaBook" +
                                 "?serverTimezone=UTC", "scott",
                         "(76%EtjM");
 
@@ -28,14 +29,31 @@ public class StaffController {
                 insert = connection.prepareStatement("INSERT Into Staff (id, lastName, firstName, mi," +
                         " address, city, state, telephone) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
                 update = connection.prepareStatement("UPDATE Staff SET lastName=?, firstName=?, mi=?, address=?," +
-                        "city=?, state=?, telephone=?, email=? WHERE id=?");
+                        "city=?, state=?, telephone=? WHERE id=?");
                 clear = connection.prepareStatement("DELETE FROM Staff WHERE id=?");
             } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
             }
         }).start();
+
+
+        new Thread(() -> {//close resource
+            while (id.getScene() == null||id.getScene().getWindow()==null) {
+                Thread.yield();
+            }
+            id.getScene().getWindow().setOnCloseRequest(event -> {
+                if (connection != null) {
+                    try {
+                        connection.close();
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                }
+            });
+        }).start();
     }
 
+    @FXML
     public void view() {
         try {
             view.setString(1, id.getText());
@@ -56,6 +74,7 @@ public class StaffController {
         }
     }
 
+    @FXML
     public void insert() {
         try {
             insert.setString(1, id.getText());
@@ -67,6 +86,36 @@ public class StaffController {
             insert.setString(7, state.getText());
             insert.setString(8, telephone.getText());
             insert.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void update() {
+        try {
+            update.setString(8, id.getText());
+            update.setString(1, last.getText());
+            update.setString(2, first.getText());
+            update.setString(3, mi.getText());
+            update.setString(4, address.getText());
+            update.setString(5, city.getText());
+            update.setString(6, state.getText());
+            update.setString(7, telephone.getText());
+            update.executeUpdate();
+            message.setText("Successfully updated");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void clear() {
+        try {
+            clear.setString(1, id.getText());
+            clear.executeUpdate();
+            message.setText("Cleared successfully");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

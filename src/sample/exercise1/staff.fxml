@@ -39,7 +39,7 @@
     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
         <Button mnemonicParsing="false" onAction="#view" text="View" />
         <Button mnemonicParsing="false" onAction="#insert" text="Insert" />
-        <Button mnemonicParsing="false" text="Update" />
-        <Button mnemonicParsing="false" text="Clear" />
+        <Button mnemonicParsing="false" onAction="#update" text="Update" />
+        <Button mnemonicParsing="false" onAction="#clear" text="Clear" />
     </HBox>
 </VBox>
