@@ -38,7 +38,7 @@ public class StaffController {
 
 
         new Thread(() -> {//close resource
-            while (id.getScene() == null||id.getScene().getWindow()==null) {
+            while (id.getScene() == null || id.getScene().getWindow() == null) {
                 Thread.yield();
             }
             id.getScene().getWindow().setOnCloseRequest(event -> {
@@ -66,58 +66,65 @@ public class StaffController {
                 city.setText(resultSet.getString(6));
                 state.setText(resultSet.getString(7));
                 telephone.setText(resultSet.getString(8));
+                message.setText("ID found");
             } else {
                 message.setText("ID not found.");
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            message.setText(throwables.getMessage());
         }
     }
 
     @FXML
     public void insert() {
-        try {
-            insert.setString(1, id.getText());
-            insert.setString(2, last.getText());
-            insert.setString(3, first.getText());
-            insert.setString(4, mi.getText());
-            insert.setString(5, address.getText());
-            insert.setString(6, city.getText());
-            insert.setString(7, state.getText());
-            insert.setString(8, telephone.getText());
-            insert.executeUpdate();
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        new Thread(() -> {
+            try {
+                insert.setString(1, id.getText());
+                insert.setString(2, last.getText());
+                insert.setString(3, first.getText());
+                insert.setString(4, mi.getText());
+                insert.setString(5, address.getText());
+                insert.setString(6, city.getText());
+                insert.setString(7, state.getText());
+                insert.setString(8, telephone.getText());
+                insert.executeUpdate();
+                message.setText("Successfully inserted");
+            } catch (SQLException throwables) {
+                message.setText(throwables.getMessage());
+            }
+        }).start();
     }
 
     @FXML
     public void update() {
-        try {
-            update.setString(8, id.getText());
-            update.setString(1, last.getText());
-            update.setString(2, first.getText());
-            update.setString(3, mi.getText());
-            update.setString(4, address.getText());
-            update.setString(5, city.getText());
-            update.setString(6, state.getText());
-            update.setString(7, telephone.getText());
-            update.executeUpdate();
-            message.setText("Successfully updated");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        new Thread(() -> {
+            try {
+                update.setString(8, id.getText());
+                update.setString(1, last.getText());
+                update.setString(2, first.getText());
+                update.setString(3, mi.getText());
+                update.setString(4, address.getText());
+                update.setString(5, city.getText());
+                update.setString(6, state.getText());
+                update.setString(7, telephone.getText());
+                update.executeUpdate();
+                message.setText("Successfully updated");
+            } catch (SQLException throwables) {
+                message.setText(throwables.getMessage());
+            }
+        }).start();
     }
 
     @FXML
     public void clear() {
-        try {
-            clear.setString(1, id.getText());
-            clear.executeUpdate();
-            message.setText("Cleared successfully");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        new Thread(() -> {
+            try {
+                clear.setString(1, id.getText());
+                clear.executeUpdate();
+                message.setText("Cleared successfully");
+            } catch (SQLException throwables) {
+                message.setText(throwables.getMessage());
+            }
+        }).start();
     }
 }
